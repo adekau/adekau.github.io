@@ -1,0 +1,736 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fourier Analysis: Drawing Llamas with Circles &#8212; Dekau.dev</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet" />
+  <link href="../../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="prev" title="Index" href="../index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+      <img src="../../_static/logo.svg" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Dekau.dev</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  2020
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Fourier Analysis: Drawing Llamas with Circles
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/docs/2020/llamas.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fourier-transform">
+   Fourier Transform
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#complex-numbers">
+   Complex Numbers
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-algebra">
+   Linear Algebra
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inner-products-of-continuous-functions">
+   Inner Products of Continuous Functions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#complex-exponentials-as-sines-and-cosines">
+   Complex Exponentials as Sines and Cosines
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#approximating-a-square-wave">
+   Approximating a Square Wave
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#drawing-llamas">
+   Drawing Llamas
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="fourier-analysis-drawing-llamas-with-circles">
+<h1>Fourier Analysis: Drawing Llamas with Circles<a class="headerlink" href="#fourier-analysis-drawing-llamas-with-circles" title="Permalink to this headline">¶</a></h1>
+<p>The Fourier transform is a method of transforming an input signal from the time domain to the frequency domain. It has a <em>huge</em> range of applications, for instance audio engineers can pick out individual undesired frequencies in a song with the Fourier transform and then get back the sound without that frequency using the inverse Fourier transform.  We can make use of the Fourier transform in digital image processing for filtering images, like gaussian blurs and compressing images using the JPEG format. Lastly, as this article will go into: drawing!</p>
+<p>What am I talking about by <em>drawing</em>? Well, the idea is that we can take a path that represents something such as a fish, the pi symbol, or just about anything else we can draw by putting pencil lead down on a piece of paper and sketching a picture without lifting the pencil until completion. Using this path we can connect a bunch of vectors rotating in circles at different frequencies tip to tail and the last vector’s tip will draw out our original sketch, or at least something very closely resembling it.</p>
+<p>Here are a few examples of what I am talking about:</p>
+<div class="figure align-default" id="id1">
+<img alt="../../_images/line.gif" src="../../_images/line.gif" />
+<p class="caption"><span class="caption-number">Fig. 1 </span><span class="caption-text">Drawing a line with circles</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>So you can draw a straight line using a shape that is about as far opposite from a straight line as possible. By modifying the circles you can change the shape that is drawn. For example, by decreasing the radius of the outer circle and increasing the speed it spins at, we can draw a square.</p>
+<div class="figure align-default" id="id2">
+<img alt="../../_images/square.gif" src="../../_images/square.gif" />
+<p class="caption"><span class="caption-number">Fig. 2 </span><span class="caption-text">A square</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<p>So what happens, then, if we add a third circle? It will allow our curves to get more sophisticated. Using a third circle we can draw a curve that looks like a fish.</p>
+<div class="figure align-default" id="id3">
+<img alt="../../_images/fish.gif" src="../../_images/fish.gif" />
+<p class="caption"><span class="caption-number">Fig. 3 </span><span class="caption-text">A fish.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>For a more extreme example of what is possible using only circles connected to other circles, here’s a llama being drawn using <span class="math notranslate nohighlight">\(1024\)</span> circles each with different frequencies, radii, and start angles. In general (most) every closed curve can be drawn using circles, called epicycles.</p>
+<div class="figure align-default" id="id4">
+<img alt="../../_images/llama.gif" src="../../_images/llama.gif" />
+<p class="caption"><span class="caption-number">Fig. 4 </span><span class="caption-text">A llama?!</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>In general, the more circles that we add, the more complicated the drawings we can produce. Also, the more circles we add for the same drawing, the better it will resemble the original “input” drawing. In order to understand what creates that animation, we will need to go into some of the underlying math and intuition behind the Fourier transform (and series). As mentioned previously, there are three conditions we can modify on a circle to draw different curves. They are: the rate at which it rotates (frequency), how big the circle is (radius), and the angle it starts at (phase). All three of these conditions can be represented using a single complex number.</p>
+<p>Here’s an example you can mess around with to visualize the effect adding circles has on the final drawing.</p>
+<iframe src="https://adekau.github.io/fourier/fourier" style="width: 100%; height: 600px;"></iframe>
+<div class="section" id="fourier-transform">
+<h2>Fourier Transform<a class="headerlink" href="#fourier-transform" title="Permalink to this headline">¶</a></h2>
+<p>But first, I should probably give a quick overview of what the Fourier transform is. It is a transformation from the time domain to the frequency domain. What does this mean? If we have a function, <span class="math notranslate nohighlight">\(\sin(2\pi\times 3t)\)</span>, then the Fourier transformation of that <span class="math notranslate nohighlight">\(\sin(2\pi\times 3t)\)</span> function would just be a single spike at the frequency <span class="math notranslate nohighlight">\(\pm 3\text{hz}\)</span>.</p>
+<div class="figure align-default" id="id5">
+<img alt="../../_images/sin2pi3t-2.svg" src="../../_images/sin2pi3t-2.svg" /><p class="caption"><span class="caption-number">Fig. 5 </span><span class="caption-text">The graph of <span class="math notranslate nohighlight">\(\sin(2\pi\times 3t)\)</span></span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<div class="figure align-default" id="id6">
+<img alt="../../_images/fft_sin2pi3t-3.svg" src="../../_images/fft_sin2pi3t-3.svg" /><p class="caption"><span class="caption-number">Fig. 6 </span><span class="caption-text">The magnitude of <span class="math notranslate nohighlight">\(\sin(2\pi\times 3t)\)</span> in the frequency domain.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+<p>As expected, there are spikes at the frequency <span class="math notranslate nohighlight">\(3\text{hz}\)</span> and <span class="math notranslate nohighlight">\(-3\text{hz}\)</span>. Essentially what we are doing is finding what frequencies are present in whatever we want and then combining those sine waves into an approximation of the original thing we wanted. Over the next few sections I’ll attempt to show how the Fourier transform works.</p>
+</div>
+<div class="section" id="complex-numbers">
+<h2>Complex Numbers<a class="headerlink" href="#complex-numbers" title="Permalink to this headline">¶</a></h2>
+<p>This section will be a quick refresher on what a complex number is, and can be skipped if you are already familiar with them. A complex number consists of two parts, the “real” part, and the “imaginary” part. This takes numbers we are already familiar with and essentially adds another axis to represent them with.</p>
+<p>A complex number is written as <span class="math notranslate nohighlight">\(3+4i\)</span>, where <span class="math notranslate nohighlight">\(3\)</span> is the real part and <span class="math notranslate nohighlight">\(4i\)</span> is the imaginary part. These two separate pieces are added together to form a complex number.</p>
+<p>Another useful property of complex numbers here is that they can be easily thought of as two-dimensional vector where the real portion is <span class="math notranslate nohighlight">\(x\)</span> and the imaginary part is <span class="math notranslate nohighlight">\(y\)</span> in a standard point, <span class="math notranslate nohighlight">\((x, y)\)</span>, in the two-dimensional Euclidean space. This representation is very convenient here due to the connection between trigonometry and complex exponentials. The formula that provides the link between the two is known as <em>Euler’s Identity</em>. This will be covered further in a later section in the article.</p>
+</div>
+<div class="section" id="linear-algebra">
+<h2>Linear Algebra<a class="headerlink" href="#linear-algebra" title="Permalink to this headline">¶</a></h2>
+<p>Linear Algebra is an important concept in understanding how we draw pictures using vectors rotating in circles. Namely, how we can represent vectors in terms of other vectors. In the standard 2D <span class="math notranslate nohighlight">\((x, y)\)</span> Euclidean space, we can represent all vectors in terms of the <span class="math notranslate nohighlight">\(\textbf{x}\)</span> and <span class="math notranslate nohighlight">\(\textbf{y}\)</span> unit vectors. These are typically called <span class="math notranslate nohighlight">\(\hat{\textbf{i}}\)</span> and <span class="math notranslate nohighlight">\(\hat{\textbf{j}}\)</span> (pronounced “i-hat” and “j-hat”) with <span class="math notranslate nohighlight">\(\hat{\textbf{i}} = (1, 0)\)</span> (the <span class="math notranslate nohighlight">\(x\)</span>-axis) and <span class="math notranslate nohighlight">\(\hat{\textbf{j}} = (0, 1)\)</span> (the <span class="math notranslate nohighlight">\(y\)</span>-axis). To do this we have two operations we can use: multiplication by a scalar and addition. For example, the vector <span class="math notranslate nohighlight">\(\vec{a} = (5,-8)\)</span> can be expressed as</p>
+<div class="math notranslate nohighlight" id="equation-eq-1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-eq-1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{equation}\begin{aligned}\vec{a} &amp;= 5\cdot \hat{\textbf{i}} - 8\cdot \hat{\textbf{j}} \\ &amp;= 5\cdot (1, 0) + -8\cdot (0, 1)\\ &amp;=(5, 0) + (0, -8)\\ &amp;= (5, -8)\end{aligned}\end{equation}\end{split}\]</div>
+<p>This multiplication by a scalar and addition of vectors to produce another vector is known as the <strong>linear combination</strong> of a set of vectors. In this instance, that set of vectors is the unit vectors <span class="math notranslate nohighlight">\(\hat{\textbf{i}}\)</span> and <span class="math notranslate nohighlight">\(\hat{\textbf{j}}\)</span>.</p>
+<div class="figure align-default" id="id7">
+<img alt="../../_images/dotproduct-1.svg" src="../../_images/dotproduct-1.svg" /><p class="caption"><span class="caption-number">Fig. 7 </span><span class="caption-text">Two vectors, <span class="math notranslate nohighlight">\(\vec{u}\)</span> and <span class="math notranslate nohighlight">\(\vec{v}\)</span> with an angle of <span class="math notranslate nohighlight">\(90^{\circ}\)</span> between them and both length <span class="math notranslate nohighlight">\(1\)</span></span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+<p>But <span class="math notranslate nohighlight">\(\hat{\textbf{i}}\)</span> and <span class="math notranslate nohighlight">\(\hat{\textbf{j}}\)</span> aren’t the only vectors that can be used to represent other vectors, however. In fact, any two vectors can be scaled and added together to form any other vector as long as they are not a multiple of the other themselves. For example <span class="math notranslate nohighlight">\((1,-1)\)</span> and <span class="math notranslate nohighlight">\((-2, 2)\)</span> would not be valid since <span class="math notranslate nohighlight">\((-2,2) = -2 \times (1,-1)\)</span>. In the above picture, we have vectors <span class="math notranslate nohighlight">\(\vec{u} = (\tfrac{1}{\sqrt{2}},\tfrac{1}{\sqrt{2}})\)</span> and <span class="math notranslate nohighlight">\(\vec{v} = (-\tfrac{1}{\sqrt{2}}, \tfrac{1}{\sqrt{2}})\)</span> which have length 1 and are orthogonal (a <span class="math notranslate nohighlight">\(90^{\circ}\)</span> angle between them). Neither of these vectors can be scaled to equal the other, which means they are <strong>linearly independent</strong> and therefore they can be basis vectors of the entire 2D space.</p>
+<p>The <strong>dot product</strong> (or sometimes called “<strong>inner product</strong>”) is how we determine what number to scale vectors by to represent them in terms of the chosen vectors.
+In order to represent the vector <span class="math notranslate nohighlight">\(\vec{\textbf{w}} = (0.7, 1.2)\)</span> from the above diagram in terms of the vectors <span class="math notranslate nohighlight">\(\vec{u}\)</span> and <span class="math notranslate nohighlight">\(\vec{v}\)</span>, we need to figure out what numbers to multiply them in order to form the linear combination <span class="math notranslate nohighlight">\(\vec{w} = c_1\cdot \vec{u}+c_2\cdot \vec{v}\)</span>. Specifically, the numbers that we need from the dot product are the constant multipliers <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span>. Another way of thinking about this concept is that the dot product answers the question “how much of <span class="math notranslate nohighlight">\(\vec{u}\)</span> is in <span class="math notranslate nohighlight">\(\vec{w}\)</span>?” This intuition will be important later on when we go into the math behind the Fourier transform. Anyways, we can figure out what <span class="math notranslate nohighlight">\(c_1\)</span> is by taking the dot product of <span class="math notranslate nohighlight">\(\vec{w}\)</span> with <span class="math notranslate nohighlight">\(\vec{u}\)</span>, also note that the order does not matter (e.g., <span class="math notranslate nohighlight">\(\langle\vec{u},\vec{w}\rangle = \langle\vec{w},\vec{u}\rangle\)</span>).</p>
+<div class="math notranslate nohighlight" id="equation-eq-2">
+<span class="eqno">(2)<a class="headerlink" href="#equation-eq-2" title="Permalink to this equation">¶</a></span>\[\begin{split}
+\begin{equation}\begin{aligned} c_1 &amp;= \langle\vec{u},\vec{w}\rangle\\ &amp;=({u}_x\times {w}_x)+({u}_y\times {w}_y)\\ &amp;= (\tfrac{1}{\sqrt{2}}\times 0.7)+(\tfrac{1}{\sqrt{2}}\times 1.2)\\ &amp;= 1.3435 \end{aligned}\end{equation}
+\end{split}\]</div>
+<p>So we need to scale <span class="math notranslate nohighlight">\(\vec{u}\)</span> by a factor of <span class="math notranslate nohighlight">\(1.3435\)</span> which means it will get stretched by a factor of <span class="math notranslate nohighlight">\(1.3435\)</span> times its original size. Our <span class="math notranslate nohighlight">\(\vec{u}\)</span> component of <span class="math notranslate nohighlight">\(\vec{w}\)</span> (<span class="math notranslate nohighlight">\(c_1\)</span>) therefore is <span class="math notranslate nohighlight">\(1.3435\)</span>.</p>
+<div class="math notranslate nohighlight" id="equation-eq-3">
+<span class="eqno">(3)<a class="headerlink" href="#equation-eq-3" title="Permalink to this equation">¶</a></span>\[\begin{split}
+\begin{equation}\begin{aligned} c_2 &amp;= \langle\vec{v},\vec{w}\rangle\\ &amp;=({v}_x\times {w}_x)+({v}_y\times {w}_y)\\ &amp;=(-\tfrac{1}{\sqrt{2}}\times 0.7)+(\tfrac{1}{\sqrt{2}}\times 1.2)\\ &amp;= 0.353553 \end{aligned}\end{equation}
+\end{split}\]</div>
+<p>Similarly, we need to scale <span class="math notranslate nohighlight">\(\vec{v}\)</span> by a factor of <span class="math notranslate nohighlight">\(0.353553\)</span> which means it will get shrunk (or compressed) by a factor of <span class="math notranslate nohighlight">\(0.353553\)</span> times its original size. Our <span class="math notranslate nohighlight">\(\vec{v}\)</span> component of <span class="math notranslate nohighlight">\(\vec{w}\)</span> (<span class="math notranslate nohighlight">\(c_2\)</span>) therefore is <span class="math notranslate nohighlight">\(0.353553\)</span>.</p>
+<p>We wind up with our linear combination being</p>
+<div class="math notranslate nohighlight" id="equation-eq-4">
+<span class="eqno">(4)<a class="headerlink" href="#equation-eq-4" title="Permalink to this equation">¶</a></span>\[\begin{split}
+\begin{equation}\begin{aligned} \vec{w} &amp;= 1.3435\cdot \vec{u}+0.353553\cdot \vec{v}\\ &amp;= (0.95, 0.95)+(-0.25, 0.25)\\ &amp;= (0.7, 1.2)\end{aligned}\end{equation}
+\end{split}\]</div>
+<p>Which is indeed equal to our original vector, <span class="math notranslate nohighlight">\(\vec{w}\)</span>.</p>
+<div class="figure align-default" id="id8">
+<img alt="../../_images/dotproductW-1.svg" src="../../_images/dotproductW-1.svg" /><p class="caption"><span class="caption-number">Fig. 8 </span><span class="caption-text">The linear combination of <span class="math notranslate nohighlight">\(\vec{u}\)</span> and <span class="math notranslate nohighlight">\(\vec{v}\)</span> to produce <span class="math notranslate nohighlight">\(\vec{w}\)</span></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+<p>The dot product of any two vectors is defined as</p>
+<div class="math notranslate nohighlight" id="equation-eq-5">
+<span class="eqno">(5)<a class="headerlink" href="#equation-eq-5" title="Permalink to this equation">¶</a></span>\[\begin{split}
+\begin{equation}\begin{aligned} \langle\vec{v_1},\vec{v_2}\rangle &amp;= {v_1}_x\times {v_2}_x + {v_1}_y\times {v_2}_y\\ &amp;= \|\vec{v_1}\|\times \|\vec{v_2}\| \times \cos(\theta) \end{aligned}\end{equation}
+\end{split}\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\theta\)</span> is the angle between <span class="math notranslate nohighlight">\(v_1\)</span> and <span class="math notranslate nohighlight">\(v_2\)</span> and <span class="math notranslate nohighlight">\(\|\vec{v}\|\)</span> is the magnitude of the vector. The magnitude is also known as the <strong>norm</strong> and is defined as <span class="math notranslate nohighlight">\(\|\vec{v}\| = \sqrt{{v}_x^2 + {v}_y^2}\)</span>. That equation probably looks familiar, and that would be because it’s just the Pythagorean theorem we’ve all learned at some point in a K-12 math class.</p>
+<div class="figure align-default" id="id9">
+<img alt="../../_images/pythagthm-1.svg" src="../../_images/pythagthm-1.svg" /><p class="caption"><span class="caption-number">Fig. 9 </span><span class="caption-text">Pythagorean Triangle</span><a class="headerlink" href="#id9" title="Permalink to this image">¶</a></p>
+</div>
+<p>The dot product also has some important properties that make it useful in our case. First, the dot product of any vector with itself is the magnitude of the vector squared (<span class="math notranslate nohighlight">\(\vec{v_1}\cdot \vec{v_1} = \|\vec{v_1}\|^2\)</span>). For instance,</p>
+<div class="math notranslate nohighlight" id="equation-eq-6">
+<span class="eqno">(6)<a class="headerlink" href="#equation-eq-6" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}\langle[5, 7],[5, 7]\rangle = \sqrt{5^2 + 7^2}^2 = \sqrt{74}^2 = 74\end{equation}
+\]</div>
+<p>Secondly, the dot product of vectors that are perpendicular (form a right angle where they intersect) to eachother is <span class="math notranslate nohighlight">\(0\)</span>. This is because <span class="math notranslate nohighlight">\(\cos(\frac{\pi}{2}) = 0\)</span>. Therefore, with <span class="math notranslate nohighlight">\(\vec{v_1}, \vec{v_2}\)</span> perpenicular, you end up with</p>
+<div class="math notranslate nohighlight" id="equation-eq-7">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-7" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}\langle\vec{v_1},\vec{v_2}\rangle = \|\vec{v_1}\|\times \|\vec{v_2}\|\times 0 = 0\end{equation}
+\]</div>
+<p>With our previous intuition of “how much <span class="math notranslate nohighlight">\(\vec{v_1}\)</span> is in <span class="math notranslate nohighlight">\(\vec{v_2}\)</span>”, it makes sense for it to be <span class="math notranslate nohighlight">\(0\)</span> since these two vectors are orthogonal.</p>
+</div>
+<div class="section" id="inner-products-of-continuous-functions">
+<h2>Inner Products of Continuous Functions<a class="headerlink" href="#inner-products-of-continuous-functions" title="Permalink to this headline">¶</a></h2>
+<p>The previous section’s dot product was for the dot product of two vectors, but this definition can be extended to also be valid for continuous functions. The key difference is in the type of summation being done. As mentioned previously, the formula for a 2D dot product is</p>
+<div class="math notranslate nohighlight" id="equation-eq-8">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-8" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}\langle\vec{a},\vec{b}\rangle = {a}_x \times {b}_x + {a}_y \times {b}_y\end{equation}
+\]</div>
+<p>Or rather, the summation of the like terms of both vectors where the length of the vectors is finite (<span class="math notranslate nohighlight">\(2\)</span>, in this case) so the summation is discrete. Another way of writing this equation for any dimension is</p>
+<div class="math notranslate nohighlight" id="equation-eq-9">
+<span class="eqno">(9)<a class="headerlink" href="#equation-eq-9" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}\langle\vec{a},\vec{b}\rangle = \sum_{n =1}^{N}{a_n\times b_n}\end{equation}
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(N\)</span> is the dimension. The sigma-notation summation here is summation over a discrete interval. For instance, in a 3D space, the summation is over the interval <span class="math notranslate nohighlight">\([1, 3]\)</span>. This summation, however, is only good for vectors in <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>. The formula for complex vectors of length <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(\mathbb{C}^n\)</span>, is very similar. We just need to take the conjugate of the second vector.</p>
+<div class="math notranslate nohighlight" id="equation-eq-10">
+<span class="eqno">(10)<a class="headerlink" href="#equation-eq-10" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}\langle\vec{a},\vec{b}\rangle = \sum_{n = 1}^{N}{a_n\times \overline{b_n}}\end{equation}
+\]</div>
+<p>It’s important to note that the complex conjugate here makes this formula “antilinear in the second argument”, which is to say <span class="math notranslate nohighlight">\(\vec{a}\cdot(\vec{b}+\vec{c})=\vec{a}\cdot \vec{b} + \vec{a}\cdot \vec{c}\)</span>. However, in scalar multiplication it is not linear and instead we must pull out the conjugate of the scalar, <span class="math notranslate nohighlight">\(\vec{a}\cdot(b\times \vec{c})=\overline{b}\times (\vec{a}\cdot \vec{c})\)</span>. It is linear in the first argument, though, which means when you pull out a scalar multiple from the first argument of the inner product, you do not need to take the conjugate of the scalar. In general, it will be antilinear in the argument you are taking the complex conjugate of, and linear in the other one.</p>
+<p>What we need is a type of summation that can be performed over continuous intervals where the summation interval can be infinitely small. This sounds like the perfect use case for an integral.</p>
+<div class="math notranslate nohighlight" id="equation-eq-11">
+<span class="eqno">(11)<a class="headerlink" href="#equation-eq-11" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}\langle f(t),g(t)\rangle = \frac{1}{T}\int_0^T{f(t)\overline{g(t)}dt}\end{equation}
+\]</div>
+<p>The only restrictions here being that the functions <span class="math notranslate nohighlight">\(f(t)\)</span> and <span class="math notranslate nohighlight">\(g(t)\)</span> must be square integrable over the interval <span class="math notranslate nohighlight">\([0,T]\)</span>, which is to say that integrating the function’s absolute value squared is finite over <span class="math notranslate nohighlight">\([0, T]\)</span>.</p>
+<div class="math notranslate nohighlight" id="equation-eq-12">
+<span class="eqno">(12)<a class="headerlink" href="#equation-eq-12" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}f(t) \in L^2(0,T)\quad\text{if}\quad\int_0^T{|f(t)|^2dt}\quad\text{is finite.}\end{equation}
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><span class="math notranslate nohighlight">\(L^2\)</span> is the set of square-integrable functions and <span class="math notranslate nohighlight">\(L^2(0, T)\)</span> is the set of square-integrable functions over interval <span class="math notranslate nohighlight">\([0, T]\)</span>.</p>
+</div>
+<p>To make this a bit more familiar and similar looking to our previous definition of the dot product in 2D space, we can write this integral as a Reimann Sum (sigma-notation) like so</p>
+<div class="math notranslate nohighlight" id="equation-eq-13">
+<span class="eqno">(13)<a class="headerlink" href="#equation-eq-13" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}\frac{1}{T}\int_0^T{f(t)g(t)dt} = \lim_{N\to\infty} \frac{1}{T}\sum_{k=0}^{N}{f(\frac{T\times k}{N})\times \overline{g(\frac{T\times k}{N})}\times\frac{T}{N}}\end{equation}
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(\dfrac{T}{N}\)</span> is the equivalent of <span class="math notranslate nohighlight">\(dt\)</span> here. It is the infinitesimally small piece that each step gets multiplied by. Functions <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> then take the upper bound <span class="math notranslate nohighlight">\(T\)</span> times the ratio between the current step in the summation and what the limit approaches. This keeps the value <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are taking as a parameter within the integration interval. In lower steps (<span class="math notranslate nohighlight">\(k = 0, 1, 2\)</span>, etc) <span class="math notranslate nohighlight">\(\frac{T\times k}{N}\)</span> will be much closer to <span class="math notranslate nohighlight">\(0\)</span> and thus the argument will be much closer <span class="math notranslate nohighlight">\(0\)</span>. Where as <span class="math notranslate nohighlight">\(k\)</span> approaches <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(\frac{T\times k}{N}\)</span> will be closer to <span class="math notranslate nohighlight">\(1\)</span> and as a result be closer to <span class="math notranslate nohighlight">\(T\)</span>.</p>
+</div>
+<div class="section" id="complex-exponentials-as-sines-and-cosines">
+<h2>Complex Exponentials as Sines and Cosines<a class="headerlink" href="#complex-exponentials-as-sines-and-cosines" title="Permalink to this headline">¶</a></h2>
+<p>Complex exponentials provide a convenient way for us to easily deal with sines and cosines. There’s a surprising link between the world of trigonometry and the complex plane. The formula that describes that link is called Euler’s Identity. Here is the formula for Euler’s Identity, as promised in the <em>Complex Numbers</em> section.</p>
+<div class="math notranslate nohighlight" id="equation-eq-14">
+<span class="eqno">(14)<a class="headerlink" href="#equation-eq-14" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}e^{ix} = \cos(x) + i \times \sin(x)\end{equation}
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(x\)</span> describes how far around a circle to travel. For instance, <span class="math notranslate nohighlight">\(e^{\frac{\pi}{4} i}\)</span> goes around the circle <span class="math notranslate nohighlight">\(\frac{\pi}{4}\)</span> radians and ends up at <span class="math notranslate nohighlight">\(\frac{\sqrt{2}}{2} + \frac{\sqrt{2}}{2}i\)</span>. Additionally, <span class="math notranslate nohighlight">\(e^{\pi i}\)</span> goes around the circle <span class="math notranslate nohighlight">\(\pi\)</span> radians and ends up at <span class="math notranslate nohighlight">\(-1 + 0i\)</span>, which is Euler’s other famous identity:</p>
+<div class="math notranslate nohighlight" id="equation-eq-15">
+<span class="eqno">(15)<a class="headerlink" href="#equation-eq-15" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}e^{\pi i} = -1\end{equation}
+\]</div>
+<div class="figure align-default" id="id10">
+<img alt="../../_images/e-ix-1.gif" src="../../_images/e-ix-1.gif" />
+<p class="caption"><span class="caption-number">Fig. 10 </span><span class="caption-text">How <span class="math notranslate nohighlight">\(e^{ix}\)</span> correlates to Trigonometry</span><a class="headerlink" href="#id10" title="Permalink to this image">¶</a></p>
+</div>
+<p>Why is this the case? How does raising <span class="math notranslate nohighlight">\(e\)</span> to an imaginary number cause rotation about a unit circle? The answer lies in physics. If the position <span class="math notranslate nohighlight">\(p\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-eq-16">
+<span class="eqno">(16)<a class="headerlink" href="#equation-eq-16" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}p(t)=e^{it}\end{equation}
+\]</div>
+<p>Then the velocity of that point is the first derivative of <span class="math notranslate nohighlight">\(p(t)\)</span>.</p>
+<div class="math notranslate nohighlight" id="equation-eq-17">
+<span class="eqno">(17)<a class="headerlink" href="#equation-eq-17" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}v(t)=\frac{dp}{dt}=i\times e^{it}\end{equation}
+\]</div>
+<p>And that is all we need! The velocity is the same as the position but imaginary instead of real. Multiplying by <span class="math notranslate nohighlight">\(i\)</span> is like rotating counter-clockwise by <span class="math notranslate nohighlight">\(90^{\circ}\)</span>. For example, if you have <span class="math notranslate nohighlight">\(a\in\mathbb{R}\)</span>, then <span class="math notranslate nohighlight">\(i\times a\)</span> is whatever <span class="math notranslate nohighlight">\(a\)</span> was on the imaginary axis instead. But what if <span class="math notranslate nohighlight">\(a\)</span> was already imaginary? Then you have <span class="math notranslate nohighlight">\(a = i\times k\)</span> where <span class="math notranslate nohighlight">\(k\)</span> is some real number. Multiplying <span class="math notranslate nohighlight">\(a\)</span>, then by <span class="math notranslate nohighlight">\(i\)</span> becomes <span class="math notranslate nohighlight">\(i\times a = i^2\times k\)</span>. We know by the definition of <span class="math notranslate nohighlight">\(i\)</span> that <span class="math notranslate nohighlight">\(i^2\)</span> is <span class="math notranslate nohighlight">\(-1\)</span>, thus <span class="math notranslate nohighlight">\(i\times a = -k\)</span>. Since it’s just the negtive of a real number, it’s a <span class="math notranslate nohighlight">\(180^{\circ}\)</span> rotation. Since multiplying by <span class="math notranslate nohighlight">\(i\)</span> is like rotating by <span class="math notranslate nohighlight">\(90^{\circ}\)</span> then the velocity function is always perpendicular to the direction of the current position. The curve this will draw is a circle, and that’s why <span class="math notranslate nohighlight">\(f(t)=e^{it}\enspace \text{where}\enspace t\in [0, 2\pi]\)</span> draws a circle.</p>
+<p>Also, note that</p>
+<div class="math notranslate nohighlight" id="equation-eq-18">
+<span class="eqno">(18)<a class="headerlink" href="#equation-eq-18" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}\frac{1}{2\pi}\int_0^{2\pi}{\cos(t)\sin(t)\,dt}=0\end{equation}
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(\cos{t}\)</span> and <span class="math notranslate nohighlight">\(\sin{t}\)</span> are orthogonal functions, which makes <span class="math notranslate nohighlight">\(\cos\)</span> and <span class="math notranslate nohighlight">\(\sin\)</span> a basis for the Fourier transform.</p>
+<div class="figure align-default" id="id11">
+<img alt="../../_images/cos-sin-orthogonal.png" src="../../_images/cos-sin-orthogonal.png" />
+<p class="caption"><span class="caption-number">Fig. 11 </span><span class="caption-text">Demonstrating <span class="math notranslate nohighlight">\(\cos\)</span> and <span class="math notranslate nohighlight">\(\sin\)</span> being orthogonal functions.</span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
+</div>
+<p>So essentially what we are doing is a change of basis from the two dimension complex number space <span class="math notranslate nohighlight">\((1,0), (0, 1)i\)</span> to an infinite dimension space with basis <em>functions</em> <span class="math notranslate nohighlight">\((...,e^{i\frac{-4\pi}{T}t}, e^{i\frac{-2\pi}{T}t}, 1, e^{i\frac{2\pi}{T}t}, e^{i\frac{4\pi}{T}t},...)\)</span> which means that we are going from a function producing complex numbers and mapping to a new function producing an infinite dimension complex vector. This can also be represented as an infinite dimension basis on <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> by using Euler’s formula to convert the basis to <span class="math notranslate nohighlight">\((...,\cos(\frac{-2\pi}{T}),\sin(\frac{-2\pi}{T}),1,\cos(\frac{2\pi}{T}), \sin(\frac{2\pi}{T}),...)\)</span>. Since this is a linear operation and it’s mapping from one function space to another, it’s what we call a <strong>linear operator</strong>.</p>
+</div>
+<div class="section" id="approximating-a-square-wave">
+<h2>Approximating a Square Wave<a class="headerlink" href="#approximating-a-square-wave" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-default" id="id12">
+<img alt="../../_images/square_wave.svg" src="../../_images/square_wave.svg" /><p class="caption"><span class="caption-number">Fig. 12 </span><span class="caption-text">The square wave.</span><a class="headerlink" href="#id12" title="Permalink to this image">¶</a></p>
+</div>
+<p>The square wave is sort of like the “hello world” of the signal processing world. A square wave is defined as a <span class="math notranslate nohighlight">\([-\pi, \pi]\)</span> periodic wave where half the period is “on”, or <span class="math notranslate nohighlight">\(1\)</span>, and half the period is “off”, or <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<div class="math notranslate nohighlight" id="equation-eq-19">
+<span class="eqno">(19)<a class="headerlink" href="#equation-eq-19" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}\text{square}(t)= \text{sgn}(\sin{(t)})\end{equation}
+\]</div>
+<p>Where <strong>sgn</strong> is the sign function, defined as so</p>
+<div class="math notranslate nohighlight" id="equation-eq-20">
+<span class="eqno">(20)<a class="headerlink" href="#equation-eq-20" title="Permalink to this equation">¶</a></span>\[\begin{split}
+\begin{equation}\text{sgn}(x)=\begin{cases}1 &amp;\text{if}\; x&gt;0 \\ 0 &amp;\text{if}\; x=0 \\ -1 &amp;\text{if}\; x&lt;0 \end{cases}\end{equation}
+\end{split}\]</div>
+<p>So we can integrate (inner product of the square wave function and the <span class="math notranslate nohighlight">\(k\)</span>th basis term, same as a change of basis for 2D vectors as described in the <em>Linear Algebra</em> section above) to find the <span class="math notranslate nohighlight">\(k\)</span>th Fourier coefficient of the square wave.</p>
+<div class="math notranslate nohighlight" id="equation-eq-21">
+<span class="eqno">(21)<a class="headerlink" href="#equation-eq-21" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}c_k=\int_{-\pi}^{\pi}{\text{sgn}(\sin (t))e^{-i k t}dt}\end{equation}
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <span class="math notranslate nohighlight">\(\frac{2\pi}{T}\)</span> term for <span class="math notranslate nohighlight">\(e^{-i \frac{2\pi}{T} k t}\)</span> disappears since <span class="math notranslate nohighlight">\(T=2\pi\)</span>.</p>
+</div>
+<p>Since the sign function is discontinuous, we need to separate the integral into a new integral for each case of the sign function.</p>
+<div class="figure align-default" id="id13">
+<img alt="../../_images/sin.svg" src="../../_images/sin.svg" /><p class="caption"><span class="caption-number">Fig. 13 </span><span class="caption-text">The sin wave on the interval from <span class="math notranslate nohighlight">\(-\pi\)</span> to <span class="math notranslate nohighlight">\(\pi\)</span>.</span><a class="headerlink" href="#id13" title="Permalink to this image">¶</a></p>
+</div>
+<p>As we can see, between <span class="math notranslate nohighlight">\([-\pi, 0]\)</span>, the sign of <span class="math notranslate nohighlight">\(\sin(t)\)</span> is negative. At <span class="math notranslate nohighlight">\(0\)</span>, it’s <span class="math notranslate nohighlight">\(0\)</span>, and between <span class="math notranslate nohighlight">\([0, \pi]\)</span> it’s positive. Therefore the separated integral looks like</p>
+<div class="math notranslate nohighlight" id="equation-eq-22">
+<span class="eqno">(22)<a class="headerlink" href="#equation-eq-22" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}c_k=\frac{1}{2\pi}\int_{-\pi}^{0}{-1\times e^{-i k t}dt}+\frac{1}{2\pi}\int_0^0{0\times e^{-i k t}dt}+\frac{1}{2\pi}\int_0^{\pi}{1\times e^{-i k t}dt}\end{equation}
+\]</div>
+<p>The middle term will disappear since the interval is <span class="math notranslate nohighlight">\([0, 0]\)</span> and the integrand is <span class="math notranslate nohighlight">\(0\)</span>, and we are left with</p>
+<div class="math notranslate nohighlight" id="equation-eq-23">
+<span class="eqno">(23)<a class="headerlink" href="#equation-eq-23" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}c_k=\frac{1}{2\pi}\int_{-\pi}^{0}{-e^{-i k t}dt}+\frac{1}{2\pi}\int_0^{\pi}{e^{-i k t}dt}\end{equation}
+\]</div>
+<p>Since the <span class="math notranslate nohighlight">\(-1\)</span> can be pulled out of the first integrand, this can be simplified even further to</p>
+<div class="math notranslate nohighlight" id="equation-eq-24">
+<span class="eqno">(24)<a class="headerlink" href="#equation-eq-24" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}c_k=\frac{1}{2\pi}\left(\int_0^{\pi}{e^{-i k t}dt}-\int_{-\pi}^{0}{e^{-i k t}dt}\right)\end{equation}
+\]</div>
+<p>So we can calculate this integral pretty easily. Recall that</p>
+<div class="math notranslate nohighlight" id="equation-eq-25">
+<span class="eqno">(25)<a class="headerlink" href="#equation-eq-25" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}\int{e^{i x}dx}=-i e^{i x} + C\end{equation}
+\]</div>
+<p>Here we are going to ignore the constant term and just use <span class="math notranslate nohighlight">\(-i e^{i x}\)</span>. Since <span class="math notranslate nohighlight">\(k\)</span> is just a constant term, it gets divided. We end up with the following</p>
+<div class="math notranslate nohighlight" id="equation-eq-26">
+<span class="eqno">(26)<a class="headerlink" href="#equation-eq-26" title="Permalink to this equation">¶</a></span>\[\begin{split}
+\begin{equation}
+\begin{aligned}
+    \frac{1}{2\pi}\left(\int_0^{\pi}{e^{-i k t}dt}-\int_{-\pi}^{0}{e^{-i k t}dt}\right) 
+    &amp;=\frac{1}{2\pi}\left(\frac{i e^{-i k t}}{k}\bigg\rvert_{0}^{\pi} - \frac{i e^{-i k t}}{k}\bigg\rvert_{-\pi}^{0} \right)\\ 
+    &amp;=\frac{1}{2\pi}\left[\left(\frac{ie^{-i k \pi}}{k}-\frac{i}{k}\right)-\left(\frac{i}{k}-\frac{ie^{i k \pi}}{k} \right) \right] \\ 
+    &amp;= \frac{1}{2\pi}\left(\frac{ie^{-i k \pi}-i}{k}-\frac{i+ie^{i k \pi}}{k}\right) \\ 
+    &amp;= \frac{1}{2k\pi}\left(ie^{-ik\pi}+ie^{ik\pi}-2i\right) \\ 
+    &amp;= \frac{i}{2k\pi}\left(e^{-ik\pi}+e^{ik\pi}-2\right) \\ 
+    &amp;= \frac{i\left(e^{-ik\pi}+e^{ik\pi}-2\right)}{2k\pi}
+\end{aligned}
+\end{equation}
+\end{split}\]</div>
+<p>We have a major problem with this formula, however. We need a value for <span class="math notranslate nohighlight">\(k=0\)</span>. This formula, with <span class="math notranslate nohighlight">\(k=0\)</span>, would result in a divide by <span class="math notranslate nohighlight">\(0\)</span>, which we cannot do. As a result, we need to define <span class="math notranslate nohighlight">\(c_k\)</span> for when <span class="math notranslate nohighlight">\(k=0\)</span> and for when <span class="math notranslate nohighlight">\(k\not = 0\)</span>. If we plug <span class="math notranslate nohighlight">\(0\)</span> into <span class="math notranslate nohighlight">\((26)\)</span> then we have <span class="math notranslate nohighlight">\(c_0\)</span>.</p>
+<div class="math notranslate nohighlight" id="equation-eq-27">
+<span class="eqno">(27)<a class="headerlink" href="#equation-eq-27" title="Permalink to this equation">¶</a></span>\[\begin{split}
+\begin{equation}
+\begin{aligned}
+    c_0
+    &amp;= \frac{1}{2\pi}\left(\int_0^{\pi}{e^{-i 0 t}dt}-\int_{-\pi}^{0}{e^{-i 0 t}dt}\right)\\
+    &amp;= \frac{1}{2\pi}\left( \int_0^\pi{1dt} - \int_{-\pi}^0{1dt} \right) \\
+    &amp;= \frac{1}{2\pi}\left( t\big\rvert_0^\pi - t\big\rvert_{-\pi}^0 \right)\\
+    &amp;= \frac{1}{2\pi}\left[ (\pi-0)-(0+\pi) \right] \\
+    &amp;= \frac{1}{2\pi}(\pi - \pi) \\
+    &amp;= 0
+\end{aligned}
+\end{equation}
+\end{split}\]</div>
+<p>Now that we have both cases defined we can write it as a piecewise function.</p>
+<div class="math notranslate nohighlight" id="equation-eq-28">
+<span class="eqno">(28)<a class="headerlink" href="#equation-eq-28" title="Permalink to this equation">¶</a></span>\[\begin{split}
+\begin{equation}
+c_k = \begin{cases} 0  &amp;\text{if}\; k=0 \\ \cfrac{i\left(e^{-ik\pi}+e^{ik\pi}-2\right)}{2k\pi} &amp;\text{if}\;k\not = 0 \end{cases}
+\end{equation}
+\end{split}\]</div>
+<p>Which is our final equation for the <span class="math notranslate nohighlight">\(k\)</span>th coefficient. We can plug in a few values for <span class="math notranslate nohighlight">\(k\)</span> and see what we get.</p>
+<div class="math notranslate nohighlight" id="equation-eq-29">
+<span class="eqno">(29)<a class="headerlink" href="#equation-eq-29" title="Permalink to this equation">¶</a></span>\[\begin{split}
+\begin{equation}\begin{aligned} c_{-3}&amp;=\frac{2i}{3\pi}\\c_{-2}&amp;=0\\c_{-1}&amp;=\frac{2i}{\pi}\\c_0 &amp;= 0\\ c_1 &amp;= -\frac{2i}{\pi}\\c_2 &amp;= 0\\c_3&amp;=-\frac{2i}{3\pi} \end{aligned}\end{equation}
+\end{split}\]</div>
+<p>Observe that positive and negative corresponding <span class="math notranslate nohighlight">\(c_k\)</span>s have equal magnitudes but opposite directions. So now to get an equation that we can graph to approximate our square wave, we sum each <span class="math notranslate nohighlight">\(c_k\)</span> coefficient multiplied by <span class="math notranslate nohighlight">\(e^{i k t}\)</span>.</p>
+<div class="math notranslate nohighlight" id="equation-eq-30">
+<span class="eqno">(30)<a class="headerlink" href="#equation-eq-30" title="Permalink to this equation">¶</a></span>\[\begin{split}
+\begin{equation}
+\begin{aligned}
+    f(t)
+    &amp;=\sum_{k=-3}^3{c_k \times e^{i k t}}\\ 
+    &amp;= \frac{2i}{3\pi}e^{-3it}+0+\frac{2i}{\pi}e^{-1it}+0-\frac{2i}{\pi}e^{1it}+0-\frac{2i}{3\pi}e^{3it}\\ 
+    &amp;= \frac{2i}{\pi}e^{-1it}-\frac{2i}{\pi}e^{1it}-\frac{2i}{3\pi}e^{3it}+\frac{2i}{3\pi}e^{-3it}\\ 
+    &amp;= \frac{2i}{\pi}\left(e^{-it}-e^{it}\right)+\frac{2i}{3\pi}\left(e^{-3it}-e^{3it}\right) 
+\end{aligned}
+\end{equation}
+\end{split}\]</div>
+<p>This equation looks complicated but it can actually be simplified quite a bit further using the following identity</p>
+<div class="math notranslate nohighlight" id="equation-eq-31">
+<span class="eqno">(31)<a class="headerlink" href="#equation-eq-31" title="Permalink to this equation">¶</a></span>\[\begin{split}
+\begin{equation}
+\begin{aligned}
+    e^{-ikt}-e^{ikt} 
+    &amp;= (\underbrace{\cos(-kt)}_{\cos(-x) = \cos(x)}+i\underbrace{\sin(-kt)}_{\sin(-x) = -\sin(x)})-(\cos(kt)+i\sin(kt)) \\ 
+    &amp;= (\cos(kt)-i\sin(kt))-(\cos(kt)+i\sin(kt))\\ 
+    &amp;= -2i\sin(kt)
+\end{aligned}
+\end{equation}
+\end{split}\]</div>
+<p>Using the above identity that takes our difference of complex exponentials into just an imaginary sine component, we get the following simplification</p>
+<div class="math notranslate nohighlight" id="equation-eq-32">
+<span class="eqno">(32)<a class="headerlink" href="#equation-eq-32" title="Permalink to this equation">¶</a></span>\[\begin{split}
+\begin{equation}
+\begin{aligned}
+    \frac{2i}{\pi}\left(e^{-it}-e^{it}\right)+\frac{2i}{3\pi}\left(e^{-3it}-e^{3it}\right) 
+    &amp;= \underbrace{\frac{2i}{\pi}(-2i\sin(t))}_{2i\times -2i = 4\;\text{since}\;i^2=-1}+\frac{2i}{3\pi}(-2i\sin(3t))\\ 
+    &amp;= \frac{4}{\pi}\sin(t) + \frac{4}{3\pi}\sin(3t)
+\end{aligned}
+\end{equation}
+\end{split}\]</div>
+<p>Which is <strong>a lot</strong> cleaner, since our new equation no longer involves any imaginary terms. So now we can go ahead and plot this and see how well it approximates our original square wave function.</p>
+<div class="figure align-default">
+<img alt="../../_images/MathematicaSquareWaveApprox1-1.png" src="../../_images/MathematicaSquareWaveApprox1-1.png" />
+</div>
+<p>Well, it’s not exactly a square wave <em>yet</em> but the idea is that as we add together more sine waves found in the same manner as above, then we will get the square wave as the number of sine waves we add together approaches infinity. This is what we call the Fourier Series, since it is an infinite summation of sine waves that converges to our original function. You can see in the following picture that as we go from <span class="math notranslate nohighlight">\(7\)</span> coefficients to <span class="math notranslate nohighlight">\(51\)</span> the approximation gets <em>much</em> better.</p>
+<div class="figure align-default">
+<img alt="../../_images/MathematicaSquareWaveApprox2.png" src="../../_images/MathematicaSquareWaveApprox2.png" />
+</div>
+<p>The function goes from having <span class="math notranslate nohighlight">\(2\)</span> sine waves to <span class="math notranslate nohighlight">\(13\)</span>. With these additional <span class="math notranslate nohighlight">\(9\)</span> sine waves the graph is actually starting to look a bit like a square wave.</p>
+</div>
+<div class="section" id="drawing-llamas">
+<h2>Drawing Llamas<a class="headerlink" href="#drawing-llamas" title="Permalink to this headline">¶</a></h2>
+<p>We can use the same principles demonstrated in the section above to draw pretty much anything we want to as long as we can represent it as a closed curve that is fairly smooth. As far as how to go about acquiring a function that represents a llama, there’s two things we can do. We can draw a llama in a vector graphics program and export it as an SVG and then use the SVG since SVGs are just mathematically defined curves (lines, bezier curves, etc). Or, we could take that SVG and sample it at evenly spaced intervals and get a list of sample points and execute a descrete Fourier transformation (DFT) on those sample points to get the Fourier coefficients. For this article, we are going to go with the second option as it’s more straightforward.</p>
+<div class="highlight-ts notranslate"><div class="highlight"><pre><span></span><span class="kd">const</span> <span class="nx">numSamples</span> <span class="o">=</span> <span class="mf">400</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">pts</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="kd">function</span> <span class="nx">entry</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">svgUrl</span> <span class="o">=</span> <span class="s1">&#39;./images/llama.svg&#39;</span><span class="p">;</span>
+    <span class="kd">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="nx">svgUrl</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">text</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">();</span>
+    <span class="nx">pts</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">sampleSvgPoints</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">numSamples</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">entry</span><span class="p">();</span>
+
+<span class="c1">// Might not sample exactly numPts number of sample points, but it will be</span>
+<span class="c1">// close. Not a concern using the O(N^2) DFT. Using FFT, that can be</span>
+<span class="c1">// concerning since the ideal number of point samples is an exponent of 2.</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">sampleSvgPoints</span><span class="p">(</span><span class="nx">xml</span>: <span class="kt">string</span><span class="p">,</span> <span class="nx">numPts</span>: <span class="kt">number</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="o">&lt;</span><span class="p">[</span><span class="kt">number</span><span class="p">,</span> <span class="kt">number</span><span class="p">][]</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">parser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DOMParser</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">parser</span><span class="p">.</span><span class="nx">parseFromString</span><span class="p">(</span><span class="nx">xml</span><span class="p">,</span> <span class="s1">&#39;application/xml&#39;</span><span class="p">);</span>
+    <span class="kd">let</span> <span class="nx">samplePts</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="kd">const</span> <span class="nx">paths</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">from</span><span class="p">(</span><span class="nx">doc</span><span class="p">.</span><span class="nx">querySelectorAll</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">));</span>
+    <span class="kd">const</span> <span class="nx">totalLength</span> <span class="o">=</span> <span class="nx">paths</span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">acc</span> <span class="o">+</span> <span class="nx">v</span><span class="p">.</span><span class="nx">getTotalLength</span><span class="p">(),</span> <span class="mf">0</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">step</span> <span class="o">=</span> <span class="p">(</span><span class="nx">totalLength</span> <span class="o">/</span> <span class="nx">numPts</span><span class="p">);</span>
+    <span class="nx">paths</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">path</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">sample</span> <span class="o">=</span> <span class="p">[];</span>
+        <span class="kd">const</span> <span class="nx">n</span> <span class="o">=</span> <span class="nx">M</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">getTotalLength</span><span class="p">());</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">n</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="nx">step</span><span class="p">)</span>
+            <span class="nx">sample</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">toPt</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">getPointAtLength</span><span class="p">(</span><span class="nx">i</span><span class="p">)));</span>
+        <span class="nx">samplePts</span> <span class="o">=</span> <span class="nx">samplePts</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">sample</span><span class="p">);</span>
+    <span class="p">});</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nx">samplePts</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="nx">numPts</span><span class="p">)</span>
+        <span class="nx">samplePts</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="nx">samplePts</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">toPt</span><span class="p">(</span><span class="nx">pt</span>: <span class="kt">SVGPoint</span><span class="p">)</span><span class="o">:</span> <span class="p">[</span><span class="kt">number</span><span class="p">,</span> <span class="kt">number</span><span class="p">]</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nx">pt</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">pt</span><span class="p">.</span><span class="nx">y</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Sampling an SVG for points
+So then we run the Discrete Fourier Transform (DFT) on those sampled points to find the Fourier coefficients that we want just like for the square wave above. The Discrete Fourier transform equation is the following</p>
+<div class="math notranslate nohighlight" id="equation-eq-33">
+<span class="eqno">(33)<a class="headerlink" href="#equation-eq-33" title="Permalink to this equation">¶</a></span>\[
+\begin{equation}c_k=\frac{1}{N}\sum_{j=0}^{N}{p(j)e^{-i\frac{2\pi}{N}kj}}\end{equation}
+\]</div>
+<p>Where <span class="math notranslate nohighlight">\(N\)</span> is the total number of sample points in our list of sample points we want to transform. For our use case <span class="math notranslate nohighlight">\(p(k)\)</span> is just going to be keying an array essentially. For example, if <span class="math notranslate nohighlight">\(p\)</span> is our list of sample points, then in Javascript it would just be <code class="docutils literal notranslate"><span class="pre">p[k]</span></code>. The DFT is really the same thing as the Fourier series except we are summing evenly spaced definite samples rather than having a limit as the change between steps reaches <span class="math notranslate nohighlight">\(0\)</span>, or equally stated the number of terms being summed aproaches <span class="math notranslate nohighlight">\(\infty\)</span>. The DFT also is a way to convert <span class="math notranslate nohighlight">\(N\)</span> evenly spaced sample complex points in the time domain into their representation in the frequency domain. That is, figuring out the strengths of each whole number sinusoidal frequency. This is the direct application of the change of basis to the <span class="math notranslate nohighlight">\(N\)</span>-dimensional basis <span class="math notranslate nohighlight">\((...,e^{i\frac{-4\pi}{T}t}, e^{i\frac{-2\pi}{T}t}, 1, e^{i\frac{2\pi}{T}t}, e^{i\frac{4\pi}{T}t},...)\)</span> as explained a few sections ago in the <em>Complex Exponentials as Sines and Cosines</em> section.</p>
+<p>We can implement the DFT fairly easy using two loops, the outer loop calculating each coefficient <span class="math notranslate nohighlight">\(c_k\)</span>, and the inner loop doing the numerical integration summation and dividing by <span class="math notranslate nohighlight">\(N\)</span> to get the <em>average</em> strength of each frequency <span class="math notranslate nohighlight">\(k\)</span>. This approach is very slow, but will work for decently small numbers of points. This ends up being <span class="math notranslate nohighlight">\(\mathcal{O}(kj)\)</span> which at worst case will be <span class="math notranslate nohighlight">\(\mathcal{O}(N^2)\)</span>. We can do <em>much</em> better than this with more efficient algorithms, like the Radix-2 Fast Fourier Transform (FFT) which is on average <span class="math notranslate nohighlight">\(\mathcal{O}(N\log(N))\)</span>, however this article is already getting lengthy so that can be a topic for a future article.</p>
+<div class="highlight-ts notranslate"><div class="highlight"><pre><span></span><span class="k">import</span> <span class="o">*</span> <span class="kr">as</span> <span class="nx">M</span> <span class="nx">from</span> <span class="s1">&#39;mathjs&#39;</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">type</span> <span class="nx">DFTData</span> <span class="o">=</span> <span class="nx">M</span><span class="p">.</span><span class="nx">Complex</span> <span class="o">&amp;</span> <span class="p">{</span>
+    <span class="nx">freq</span>: <span class="kt">number</span><span class="p">;</span>
+    <span class="nx">radius</span>: <span class="kt">number</span><span class="p">;</span>
+    <span class="nx">phase</span>: <span class="kt">number</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">async</span> <span class="kd">function</span> <span class="nx">dft</span><span class="p">(</span><span class="nx">cps</span>: <span class="kt">M.Complex</span><span class="p">[])</span><span class="o">:</span> <span class="nx">Promise</span><span class="o">&lt;</span><span class="nx">DFTData</span><span class="p">[]</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">X</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="kd">const</span> <span class="nx">N</span> <span class="o">=</span> <span class="nx">cps</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">N</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">sum</span> <span class="o">=</span> <span class="nx">M</span><span class="p">.</span><span class="nx">complex</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">n</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">n</span> <span class="o">&lt;</span> <span class="nx">N</span><span class="p">;</span> <span class="nx">n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">const</span> <span class="nx">xn</span> <span class="o">=</span> <span class="nx">cps</span><span class="p">[</span><span class="nx">n</span><span class="p">];</span>
+            <span class="kd">const</span> <span class="nx">theta</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mf">2</span> <span class="o">*</span> <span class="nx">M</span><span class="p">.</span><span class="nx">pi</span> <span class="o">*</span> <span class="nx">i</span> <span class="o">*</span> <span class="nx">n</span><span class="p">)</span> <span class="o">/</span> <span class="nx">N</span><span class="p">;</span>
+            <span class="kd">const</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">M</span><span class="p">.</span><span class="nx">complex</span><span class="p">(</span><span class="sb">`</span><span class="si">${</span><span class="nx">M</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">theta</span><span class="p">)</span><span class="si">}</span><span class="sb">+</span><span class="si">${</span><span class="nx">M</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">theta</span><span class="p">)</span><span class="si">}</span><span class="sb">i`</span><span class="p">);</span>
+            <span class="nx">sum</span> <span class="o">=</span> <span class="nx">M</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">M</span><span class="p">.</span><span class="nx">multiply</span><span class="p">(</span><span class="nx">xn</span><span class="p">,</span> <span class="nx">c</span><span class="p">))</span> <span class="kr">as</span> <span class="nx">M</span><span class="p">.</span><span class="nx">Complex</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="kd">const</span> <span class="p">{</span> <span class="nx">re</span><span class="p">,</span> <span class="nx">im</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">M</span><span class="p">.</span><span class="nx">multiply</span><span class="p">(</span><span class="mf">1</span> <span class="o">/</span> <span class="nx">N</span><span class="p">,</span> <span class="nx">sum</span><span class="p">)</span> <span class="kr">as</span> <span class="nx">M</span><span class="p">.</span><span class="nx">Complex</span><span class="p">;</span>
+        <span class="nx">X</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span>
+            <span class="nx">re</span><span class="p">,</span>
+            <span class="nx">im</span><span class="p">,</span>
+            <span class="nx">freq</span>: <span class="kt">i</span><span class="p">,</span>
+            <span class="nx">radius</span>: <span class="kt">M.sqrt</span><span class="p">((</span><span class="nx">re</span> <span class="o">*</span> <span class="nx">re</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nx">im</span> <span class="o">*</span> <span class="nx">im</span><span class="p">)),</span>
+            <span class="nx">phase</span>: <span class="kt">M.atan2</span><span class="p">(</span><span class="nx">im</span><span class="p">,</span> <span class="nx">re</span><span class="p">)</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">X</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em><span class="math notranslate nohighlight">\(\mathcal{O}(N^2)\)</span> DFT implementation in TypeScript.</em></p>
+<p>Now that we have the coefficients, we can parameterize the curve so we can plot it.</p>
+<div class="highlight-ts notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">parameterize</span><span class="p">(</span><span class="nx">cn</span>: <span class="kt">M.Complex</span><span class="p">[])</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">async</span> <span class="p">(</span><span class="nx">t</span>: <span class="kt">number</span><span class="p">)</span><span class="o">:</span> <span class="nx">Promise</span><span class="o">&lt;</span><span class="nx">M</span><span class="p">.</span><span class="nx">Complex</span><span class="o">&gt;</span> <span class="o">=&gt;</span>
+        <span class="k">await</span> <span class="nx">sigma</span><span class="p">(</span><span class="nx">k</span> <span class="o">=&gt;</span>
+            <span class="nx">M</span><span class="p">.</span><span class="nx">multiply</span><span class="p">(</span><span class="nx">M</span><span class="p">.</span><span class="nx">complex</span><span class="p">(</span><span class="nx">cn</span><span class="p">[</span><span class="nx">k</span> <span class="o">-</span> <span class="mf">1</span><span class="p">].</span><span class="nx">re</span><span class="p">,</span> <span class="nx">cn</span><span class="p">[</span><span class="nx">k</span> <span class="o">-</span> <span class="mf">1</span><span class="p">].</span><span class="nx">im</span><span class="p">),</span> 
+                <span class="nx">M</span><span class="p">.</span><span class="nx">exp</span><span class="p">(</span><span class="nx">M</span><span class="p">.</span><span class="nx">multiply</span><span class="p">(</span><span class="nx">M</span><span class="p">.</span><span class="nx">i</span><span class="p">,</span> <span class="p">(</span><span class="nx">k</span> <span class="o">-</span> <span class="mf">1</span><span class="p">)</span> <span class="o">*</span> <span class="nx">t</span><span class="p">))),</span> <span class="p">[</span><span class="mf">1</span><span class="p">,</span> <span class="nx">numSamples</span><span class="p">])</span> <span class="kr">as</span> <span class="nx">M</span><span class="p">.</span><span class="nx">Complex</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>So what we should see from this parameterization of our approximation of a llama is that as the number of sinusoids increases, it will more accurately represent a llama. We can see this in the following animation. Note that “modes” refers to the number of positive frequencies used, and we are also using the <span class="math notranslate nohighlight">\(0\)</span> frequency as well as the corresponding negative frequencies. Thus the number of circles is <span class="math notranslate nohighlight">\(\text{\# of modes}\times 2\)</span>.</p>
+<div class="figure align-default" id="id14">
+<img alt="../../_images/modes.gif" src="../../_images/modes.gif" />
+<p class="caption"><span class="caption-number">Fig. 14 </span><span class="caption-text"><span class="math notranslate nohighlight">\(1\to500\)</span> modes of a llama approximation.</span><a class="headerlink" href="#id14" title="Permalink to this image">¶</a></p>
+</div>
+<p>From this animation, we can see that most of the work is done in the lower frequencies since it very quickly becomes llama-like. As we add more and more of the higher frequencies, the smaller details of the llama start filling in and the approximation becomes slowly more crisp.</p>
+<p>In order to recreate the image at the beginning of the article, with the circles moving around in organized chaos drawing the outline of the llama, we need some code to go through and draw each frequency’s circle. To do that we need the radius and phase which we have included in the <strong>DFTData</strong> type in the first code block. To do the actual graphics representation, we’ll be using the <a class="reference external" href="https://p5js.org/">p5.js</a> library. Note that the code depends on variables defined in the above code blocks. I’ll also provide the full source at the end.</p>
+<div class="highlight-ts notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span> <span class="nx">draw</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">complex</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">const</span> <span class="nx">cn</span> <span class="o">=</span> <span class="nx">complex</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+        <span class="kd">const</span> <span class="nx">prevx</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="nx">prevy</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+        <span class="kd">const</span> <span class="p">{</span> <span class="nx">freq</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">phase</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">cn</span><span class="p">;</span>
+        <span class="nx">x</span> <span class="o">+=</span> <span class="nx">radius</span> <span class="o">*</span> <span class="nx">M</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">freq</span> <span class="o">*</span> <span class="nx">time</span> <span class="o">+</span> <span class="nx">phase</span><span class="p">);</span>
+        <span class="nx">y</span> <span class="o">+=</span> <span class="nx">radius</span> <span class="o">*</span> <span class="nx">M</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">freq</span> <span class="o">*</span> <span class="nx">time</span> <span class="o">+</span> <span class="nx">phase</span><span class="p">);</span>
+
+        <span class="nx">stroke</span><span class="p">(</span><span class="mf">230</span><span class="p">,</span> <span class="mf">85</span><span class="p">);</span>
+        <span class="nx">noFill</span><span class="p">();</span>
+        <span class="nx">ellipse</span><span class="p">(</span><span class="nx">prevx</span><span class="p">,</span> <span class="nx">prevy</span><span class="p">,</span> <span class="nx">radius</span> <span class="o">*</span> <span class="mf">2</span><span class="p">);</span>
+        <span class="nx">stroke</span><span class="p">(</span><span class="mf">230</span><span class="p">,</span> <span class="mf">142</span><span class="p">);</span>
+        <span class="nx">line</span><span class="p">(</span><span class="nx">prevx</span><span class="p">,</span> <span class="nx">prevy</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">points</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">createVector</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">));</span>
+    <span class="nx">stroke</span><span class="p">(</span><span class="mf">230</span><span class="p">);</span>
+    <span class="nx">noFill</span><span class="p">();</span>
+    <span class="nx">beginShape</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span><span class="mf">0</span> <span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">points</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+        <span class="nx">vertex</span><span class="p">(</span><span class="nx">points</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">x</span><span class="p">,</span> <span class="nx">points</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">y</span><span class="p">);</span>
+    <span class="nx">endShape</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">time</span> <span class="o">&gt;</span> <span class="nx">M</span><span class="p">.</span><span class="nx">pi</span> <span class="o">*</span> <span class="mf">2</span><span class="p">)</span>
+        <span class="nx">points</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span>
+
+    <span class="nx">time</span> <span class="o">+=</span> <span class="p">((</span><span class="mf">2</span> <span class="o">*</span> <span class="nx">M</span><span class="p">.</span><span class="nx">pi</span><span class="p">)</span> <span class="o">/</span> <span class="nx">pts</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Which will draw for us the very same animation shown at the beginning of the article.</p>
+<div class="figure align-default">
+<img alt="../../_images/llama.gif" src="../../_images/llama.gif" />
+</div>
+<p>The complete source for the Fourier animations can be found here:</p>
+<figure class="kg-card kg-bookmark-card">
+    <a class="kg-bookmark-container" href="https://github.com/adekau/fourier">
+        <div class="kg-bookmark-content">
+            <div class="kg-bookmark-title">adekau/fourier</div>
+            <div class="kg-bookmark-description">Drawing with Fourier transforms. Contribute to adekau/fourier development by creating an account on GitHub.</div>
+            <div class="kg-bookmark-metadata">
+                <img class="kg-bookmark-icon" src="https://github.githubassets.com/favicons/favicon.svg">
+                <span class="kg-bookmark-author">adekau</span>
+                <span class="kg-bookmark-publisher">GitHub</span>
+            </div>
+        </div>
+        <div class="kg-bookmark-thumbnail"><img src="https://avatars0.githubusercontent.com/u/1340197?s=400&amp;v=4"></div>
+    </a>
+</figure>
+<!-- [
+
+adekau/fourier -->
+<!-- Drawing with Fourier transforms. Contribute to adekau/fourier development by creating an account on GitHub.
+
+![](https://github.githubassets.com/favicons/favicon.svg)adekauGitHub
+
+![](https://avatars0.githubusercontent.com/u/1340197?s&#x3D;400&amp;v&#x3D;4)
+](https://github.com/adekau/fourier) -->
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs\2020"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../index.html" title="previous page">Index</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Alex Dekau<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
