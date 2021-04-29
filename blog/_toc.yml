@@ -1,0 +1,6 @@
+# - file: README
+- file: docs/index
+
+- part: 2020
+  sections:
+      - file: docs/2020/llamas.md

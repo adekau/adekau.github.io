@@ -1,0 +1,38 @@
+#######################################################################################
+# Book settings
+title : Dekau.dev
+author: Alex Dekau
+logo: logo.svg
+
+# Short description about the book
+description: >-
+  A brief introduction to Python programming for scientific applications.
+
+#######################################################################################
+# Execution settings
+execute:
+  execute_notebooks           : cache
+
+#######################################################################################
+# HTML-specific settings
+html:
+  home_page_in_navbar         : false
+
+# #######################################################################################
+# Interact link settings
+notebook_interface            : "notebook"
+
+#######################################################################################
+# Launch button settings
+repository:
+  url                         : https://github.com/adekau/dekau.dev
+  path_to_book                : "blog"
+
+binder:
+  binderhub_url               : "https://mybinder.org"
+  text                        : "Launch binder"
+
+latex:
+  latex_engine                : "xelatex"
+  latex_documents:
+    targetname: book.tex
