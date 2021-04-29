@@ -26,6 +26,6 @@ jobs:
         shell: bash -l {0}
         run: pip install git+https://github.com/ExecutableBookProject/jupyter-book.git@master
 
-      - name: Build QuantEcon Mini Example
+      - name: Build Dekau.dev
         shell: bash -l {0}
         run: jb build blog/

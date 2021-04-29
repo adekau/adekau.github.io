@@ -37,11 +37,11 @@ jobs:
           miniconda-version: 'latest'
           python-version: 3.8
           environment-file: environment.yml
-          activate-environment: qe-mini-example
-      - name: Build QuantEcon Mini Example
+          activate-environment: dekau-dev
+      - name: Build Dekau.dev
         shell: bash -l {0}
         run: |
-          jb build mini_book/ --builder pdflatex
+          jb build blog/ --builder pdflatex
       - uses: actions/upload-artifact@v2
         with:
           name: pdf

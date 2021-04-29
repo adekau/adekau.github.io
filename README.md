@@ -1,6 +1,6 @@
-# quantecon-mini-example
+# Dekau.dev
 
-A short example showing how to write a lecture series using Jupyter Book 2.0.
+A blog on various math/programming topics.
 
 ## Creating an Conda Environment
 
