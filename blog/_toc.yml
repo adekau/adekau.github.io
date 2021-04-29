@@ -1,6 +1,6 @@
 # - file: README
-- file: docs/index
+- file: posts/index
 
 - part: 2020
   sections:
-      - file: docs/2020/llamas.md
+      - file: posts/2020/llamas.md
