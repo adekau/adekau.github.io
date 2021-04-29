@@ -25,7 +25,7 @@ notebook_interface            : "notebook"
 #######################################################################################
 # Launch button settings
 repository:
-  url                         : https://github.com/adekau/dekau.dev
+  url                         : https://github.com/adekau/adekau.github.io
   path_to_book                : "blog"
 
 binder:
