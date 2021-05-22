@@ -4,8 +4,8 @@ jupytext:
         extension: .md
 ---
 # Notes on Classical & Intuistionistic Logic
-
-## Law of Excluded Middle
+## Unorganized
+### Law of Excluded Middle
 ```{math} 
 :label: excluded-middle
 p \lor \neg{p}
