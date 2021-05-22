@@ -5,6 +5,9 @@ jupytext:
 ---
 # Notes on Classical & Intuistionistic Logic
 ## Unorganized
+### Heyting Algebra
+
+
 ### Law of Excluded Middle
 ```{math} 
 :label: excluded-middle
