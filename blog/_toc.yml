@@ -4,3 +4,6 @@
 - part: 2020
   sections:
       - file: posts/2020/llamas.md
+- part: 2021
+  sections:
+      - file: posts/2021/intuitionistic-logic.md

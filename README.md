@@ -14,13 +14,13 @@ The conda environment is provided as `environment.yml`. This environment is used
 Run the following command in your terminal:
 
 ```bash
-jb build mini_book/
+jb build blog
 ```
 
 If you would like to work with a clean build, you can empty the build folder by running:
 
 ```bash
-jb clean mini_book/
+jb clean blog
 ```
 
 If jupyter execution is cached, this command will not delete the cached folder. 
@@ -28,7 +28,7 @@ If jupyter execution is cached, this command will not delete the cached folder.
 To remove the build folder (including `cached` executables), you can run:
 
 ```bash
-jb clean --all mini_book/
+jb clean --all blog
 ```
 
 ## Publishing this Jupyter Book
